@@ -1,0 +1,1304 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>円形ニム CN(5,3)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Klee+One:wght@400;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+/* Layout: the slate table is the hero on the left; a quiet control column sits to its right and drops below it on phones. */
+:root{
+  /* page neutrals: cool limestone, biased toward the slate of the table */
+  --bg:#e6eae6;
+  --panel:#f6f8f5;
+  --panel-2:#edf1ed;
+  --ink:#16201c;
+  --ink-2:#46544e;
+  --ink-3:#71807a;
+  --rule:#cdd6d0;
+  --rule-2:#b4c0b9;
+  /* players: 山吹 (yamabuki gold) and 浅葱 (asagi blue) */
+  --p1:#8a5a00;
+  --p1-fill:#e3a31b;
+  --p1-on:#1d1405;
+  --p1-glow:#ffc94a;
+  --p2:#14687f;
+  --p2-fill:#1f7a94;
+  --p2-on:#ffffff;
+  --p2-glow:#72d6f2;
+  /* the table: slate top, clamshell-white stones */
+  --slate-1:#434d4a;
+  --slate-2:#272e2c;
+  --slate-rim:#1b211f;
+  --slate-rim-2:#0d1110;
+  --slate-line:rgba(230,238,233,.26);
+  --slate-bevel:rgba(255,255,255,.10);
+  --chalk:#eef2ec;
+  --chalk-2:rgba(238,242,236,.62);
+  --stone-hi:#ffffff;
+  --stone-top:#efeae0;
+  --stone-side:#e0d9cb;
+  --stone-side-2:#b0a793;
+  --stone-line:#a1977f;
+  --table-shadow:rgba(16,24,21,.42);
+  --pile-shadow:rgba(0,0,0,.55);
+  /* semantic */
+  --ok:#2c7a4c;
+  --ok-on:#ffffff;
+  --warn:#a8431c;
+  --focus:#1f6fd6;
+  --scrim:rgba(18,26,23,.5);
+  --knob:#ffffff;
+  --shadow:0 1px 2px rgba(22,32,28,.05),0 16px 32px -20px rgba(22,32,28,.32);
+  /* type */
+  --font-display:"Klee One","Hiragino Maru Gothic ProN","Zen Kaku Gothic New",sans-serif;
+  --font-body:"Zen Kaku Gothic New","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic UI",Meiryo,system-ui,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#101412;--panel:#171c1a;--panel-2:#1d2320;--ink:#e3eae6;--ink-2:#a5b2ac;--ink-3:#74817b;--rule:#29312e;--rule-2:#3a4440;
+    --p1:#f2b640;--p1-fill:#f2b640;--p1-on:#1d1405;--p1-glow:#ffc94a;
+    --p2:#6ccbe4;--p2-fill:#6ccbe4;--p2-on:#06222b;--p2-glow:#72d6f2;
+    --slate-1:#3c4643;--slate-2:#232a28;--slate-rim:#151a18;--slate-rim-2:#090c0b;
+    --slate-line:rgba(230,238,233,.22);--slate-bevel:rgba(255,255,255,.07);
+    --chalk:#eef2ec;--chalk-2:rgba(238,242,236,.6);
+    --stone-hi:#ffffff;--stone-top:#ebe6db;--stone-side:#dbd4c6;--stone-side-2:#a89f8b;--stone-line:#9a917c;
+    --table-shadow:rgba(0,0,0,.7);--pile-shadow:rgba(0,0,0,.6);
+    --ok:#6fd39a;--ok-on:#08200f;--warn:#ff9f7f;--focus:#86b8ff;--scrim:rgba(0,0,0,.62);--knob:#e3eae6;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 18px 36px -20px rgba(0,0,0,.75);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#101412;--panel:#171c1a;--panel-2:#1d2320;--ink:#e3eae6;--ink-2:#a5b2ac;--ink-3:#74817b;--rule:#29312e;--rule-2:#3a4440;
+  --p1:#f2b640;--p1-fill:#f2b640;--p1-on:#1d1405;--p1-glow:#ffc94a;
+  --p2:#6ccbe4;--p2-fill:#6ccbe4;--p2-on:#06222b;--p2-glow:#72d6f2;
+  --slate-1:#3c4643;--slate-2:#232a28;--slate-rim:#151a18;--slate-rim-2:#090c0b;
+  --slate-line:rgba(230,238,233,.22);--slate-bevel:rgba(255,255,255,.07);
+  --chalk:#eef2ec;--chalk-2:rgba(238,242,236,.6);
+  --stone-hi:#ffffff;--stone-top:#ebe6db;--stone-side:#dbd4c6;--stone-side-2:#a89f8b;--stone-line:#9a917c;
+  --table-shadow:rgba(0,0,0,.7);--pile-shadow:rgba(0,0,0,.6);
+  --ok:#6fd39a;--ok-on:#08200f;--warn:#ff9f7f;--focus:#86b8ff;--scrim:rgba(0,0,0,.62);--knob:#e3eae6;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 18px 36px -20px rgba(0,0,0,.75);
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:var(--font-body);font-size:15px;line-height:1.65;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+  padding-block:20px 40px;
+  -webkit-font-smoothing:antialiased;
+}
+button{font:inherit;color:inherit}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+.app{max-width:1180px;margin-inline:auto;display:grid;gap:18px}
+
+/* masthead */
+.masthead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px 24px;padding-bottom:14px;border-bottom:1px solid var(--rule)}
+.masthead .btn{flex:none}
+.mast-text{min-width:0;flex:1 1 auto}
+.masthead h1{margin:0;font-family:var(--font-display);font-weight:600;font-size:clamp(28px,4.2vw,40px);line-height:1.15;letter-spacing:.03em;text-wrap:balance}
+.masthead h1 .cn{display:inline-block;margin-left:.55em;font-family:var(--font-mono);font-weight:500;font-size:.48em;letter-spacing:0;color:var(--ink-2);vertical-align:.18em;white-space:nowrap}
+.lede{margin:6px 0 0;color:var(--ink-2);max-width:44em;text-wrap:pretty}
+
+/* layout */
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,360px);gap:20px 28px;align-items:start}
+@media (max-width:900px){.layout{grid-template-columns:minmax(0,1fr)}}
+.stage{min-width:0;display:grid;gap:8px}
+.side{min-width:0}
+
+/* board */
+.board{display:block;width:100%;height:auto;max-height:max(300px, calc(100vh - 230px));touch-action:none;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;border-radius:16px;outline:none}
+.board:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.table-shadow{fill:url(#gShadow)}
+.table-rim{fill:url(#gRim)}
+.table-top{fill:url(#gTable)}
+.table-bevel{fill:none;stroke:var(--slate-bevel);stroke-width:1.5}
+.ring{fill:none;stroke:var(--slate-line);stroke-width:2;stroke-dasharray:.5 8;stroke-linecap:round}
+.win-arc{fill:none;stroke:var(--take);stroke-opacity:.24;stroke-width:44;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.win-arc.victory{stroke-width:26;stroke-opacity:.3}
+.win-arc.flash{animation:arcflash .6s ease-out}
+@keyframes arcflash{0%,100%{stroke-opacity:.24}35%{stroke-opacity:.55}}
+.c-main{font-family:var(--font-display);font-weight:600;font-size:25px;text-anchor:middle;pointer-events:none}
+.c-sub{font-family:var(--font-body);font-size:12px;fill:var(--chalk-2);text-anchor:middle;letter-spacing:.05em;pointer-events:none}
+.lbl{font-family:var(--font-display);fill:var(--chalk);text-anchor:middle;pointer-events:none;transition:opacity .2s}
+.lbl.dim{opacity:.32}
+.lbl .idx{font-family:var(--font-body);font-size:12px;font-weight:500;fill:var(--chalk-2)}
+.lbl .cnt{font-size:23px;font-weight:600}
+.lbl .cnt.was{font-size:18px;fill:var(--chalk-2)}
+.lbl .arr{font-size:14px;fill:var(--chalk-2)}
+.lbl .to{font-size:23px;font-weight:600;fill:var(--take)}
+.pile{transition:opacity .2s}
+.pile.disabled{opacity:.3}
+.pile.nope{animation:nope .38s}
+@keyframes nope{20%{transform:translateX(-5px)}45%{transform:translateX(5px)}70%{transform:translateX(-3px)}}
+.pshadow{fill:url(#gPile)}
+.slot{fill:none;stroke:var(--chalk-2);stroke-width:1.4;stroke-dasharray:4 5}
+.focus-ring{fill:none;stroke:none}
+.pile.focused .focus-ring{stroke:var(--chalk);stroke-width:2.2;stroke-dasharray:6 5}
+.chip .side{fill:url(#gSide);stroke:var(--stone-line);stroke-width:.9}
+.chip .top{fill:url(#gTop);stroke:var(--stone-line);stroke-width:.9}
+.chip.take .side,.chip.take .top{fill:var(--take);fill-opacity:.13;stroke:var(--take);stroke-width:1.5;stroke-dasharray:4 3}
+.chip.preview .side,.chip.preview .top{stroke:var(--take);stroke-width:2}
+.hit{fill:transparent;cursor:pointer}
+.board.locked .hit{cursor:default}
+.pile.disabled .hit{cursor:not-allowed}
+.chip.enter{animation:drop .55s cubic-bezier(.2,.9,.3,1.15) both;animation-delay:var(--d,0ms)}
+.chip.leaving{animation:leave .36s cubic-bezier(.5,0,.75,0) forwards}
+@keyframes drop{from{transform:translateY(-46px);opacity:0}to{transform:none;opacity:1}}
+@keyframes leave{to{transform:translateY(-40px);opacity:0}}
+
+/* move bar under the board */
+.movebar{display:flex;align-items:center;justify-content:space-between;gap:12px 16px;flex-wrap:wrap;padding:14px 16px;background:var(--panel);border:1px solid var(--rule);border-radius:14px}
+.mb-text{flex:1 1 240px;min-width:0}
+.mb-main{font-weight:700;font-size:16px;line-height:1.45}
+.mb-sub{margin-top:2px;color:var(--ink-2);font-size:13.5px;line-height:1.5}
+.mb-sub.warn{color:var(--warn);font-weight:500}
+.mb-actions{display:flex;gap:8px;flex-wrap:wrap}
+.rb-title{font-family:var(--font-display);font-weight:600;font-size:23px;line-height:1.3;color:var(--turn)}
+
+/* buttons */
+.btn{appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:10px 18px;border-radius:10px;border:1px solid var(--rule-2);background:var(--panel);color:var(--ink);font-weight:700;font-size:14.5px;line-height:1.2;cursor:pointer;transition:background-color .15s,border-color .15s,filter .15s,transform .06s}
+.btn:hover:not(:disabled){background:var(--panel-2);border-color:var(--ink-3)}
+.btn:active:not(:disabled){transform:translateY(1px)}
+.btn:disabled{opacity:.42;cursor:not-allowed}
+.btn:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.btn.ghost{background:transparent}
+.btn.primary{background:var(--turn-fill,var(--p1-fill));border-color:transparent;color:var(--turn-on,var(--p1-on))}
+.btn.primary:hover:not(:disabled){background:var(--turn-fill,var(--p1-fill));border-color:transparent;filter:brightness(1.07)}
+.btn.small{min-height:36px;padding:7px 12px;font-size:13.5px}
+.btn.block{width:100%}
+
+/* side panel */
+.panel{background:var(--panel);border:1px solid var(--rule);border-radius:16px;padding:18px;box-shadow:var(--shadow);display:grid;gap:18px}
+.panel h2{margin:0;font-family:var(--font-display);font-weight:600;font-size:22px;line-height:1.3}
+.panel-intro{margin:-10px 0 0;color:var(--ink-2);font-size:13.5px}
+.field{display:grid;gap:8px}
+.field-label{font-size:12.5px;font-weight:700;color:var(--ink-2);letter-spacing:.08em}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{flex:1 1 0;min-width:0;min-height:42px;padding:8px 10px;border-radius:10px;border:1px solid var(--rule-2);background:transparent;color:var(--ink);font-weight:500;cursor:pointer;transition:background-color .15s,border-color .15s,color .15s}
+.seg button:hover{border-color:var(--ink-3)}
+.seg button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--panel);font-weight:700}
+.seg button:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.seg-sm button{min-height:36px;padding:6px 8px;font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+.help{margin:0;font-size:13px;line-height:1.55;color:var(--ink-2)}
+.help.warn{color:var(--warn);font-weight:500}
+.sub{display:grid;gap:10px;padding:12px;border-radius:12px;background:var(--panel-2)}
+.sub-row{display:flex;align-items:center;gap:8px 12px;flex-wrap:wrap}
+.sub-label{font-size:13px;color:var(--ink-2)}
+.sub-row .seg{flex:1 1 170px}
+.steppers{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.stepper{display:grid;justify-items:center;gap:3px;padding:7px 3px;border-radius:10px;background:var(--panel);border:1px solid var(--rule)}
+.st-name{font-size:12px;color:var(--ink-2)}
+.stepper output{font-family:var(--font-display);font-weight:600;font-size:22px;line-height:1.2;font-variant-numeric:tabular-nums}
+.st-btn{width:100%;max-width:46px;min-height:32px;border-radius:8px;border:1px solid var(--rule-2);background:var(--panel-2);color:var(--ink);font-size:17px;line-height:1;cursor:pointer}
+.st-btn:disabled{opacity:.35;cursor:not-allowed}
+.st-btn:focus-visible{outline:3px solid var(--focus);outline-offset:1px}
+
+.players{display:grid;gap:8px}
+.player{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;border:1px solid var(--rule);background:var(--panel-2);transition:border-color .2s}
+.player .dot{width:14px;height:14px;border-radius:50%;background:var(--pc)}
+.player .pname{font-weight:700;line-height:1.3}
+.player .pname small{display:block;font-weight:500;font-size:12px;color:var(--ink-2)}
+.player .tag{font-size:12px;font-weight:700;line-height:1.4;color:var(--pc);border:1px solid currentColor;border-radius:999px;padding:2px 10px}
+.player .tag:empty{display:none}
+.player.active,.player.winner{border-color:var(--pc)}
+.actions-row{display:flex;gap:8px;flex-wrap:wrap}
+.actions-row .btn{flex:1 1 auto}
+.block{display:grid;gap:10px}
+.block-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.vec{font-family:var(--font-mono);font-size:15px;font-weight:500;font-variant-numeric:tabular-nums}
+.muted{color:var(--ink-3);font-size:12.5px}
+
+.switch{display:flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;line-height:1.4}
+.switch input{appearance:none;-webkit-appearance:none;flex:none;width:42px;height:24px;margin:0;border-radius:999px;background:var(--rule-2);position:relative;cursor:pointer;transition:background-color .15s}
+.switch input::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:var(--knob);transition:transform .15s}
+.switch input:checked{background:var(--ok)}
+.switch input:checked::after{transform:translateX(18px)}
+.switch input:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+
+.ana{display:grid;gap:8px;padding:12px;border-radius:12px;border:1px dashed var(--rule-2);background:var(--panel-2);font-size:13.5px}
+.ana p{margin:0}
+.ana-head{line-height:1.55}
+.ana-math{font-family:var(--font-mono);font-size:12.5px;color:var(--ink-2);overflow-wrap:anywhere}
+.badge{display:inline-grid;place-items:center;min-width:24px;height:22px;padding:0 7px;margin-right:8px;border-radius:6px;font-family:var(--font-mono);font-weight:500;font-size:12.5px;vertical-align:1px}
+.badge.lose{background:var(--ink);color:var(--panel)}
+.badge.win{background:var(--ok);color:var(--ok-on)}
+.badge.end{background:var(--rule-2);color:var(--ink)}
+
+.hist{list-style:none;margin:0;padding:0;max-height:300px;overflow:auto;border:1px solid var(--rule);border-radius:12px;background:var(--panel-2)}
+.hist li{display:grid;grid-template-columns:2em minmax(0,1fr);gap:8px;padding:8px 12px;border-top:1px solid var(--rule);font-size:13px;line-height:1.5}
+.hist li:first-child{border-top:0}
+.h-n{font-family:var(--font-mono);color:var(--ink-3);font-variant-numeric:tabular-nums;text-align:right}
+.h-body{display:flex;flex-wrap:wrap;gap:0 8px;min-width:0}
+.h-who{font-weight:700;color:var(--pc,var(--ink-2))}
+.h-vec{font-family:var(--font-mono);color:var(--ink-2);font-variant-numeric:tabular-nums}
+
+.foot{padding-top:14px;border-top:1px solid var(--rule);color:var(--ink-3);font-size:12.5px}
+
+/* rules dialog */
+.overlay{position:fixed;inset:0;z-index:40;display:grid;place-items:center;background:var(--scrim);
+  padding-top:calc(16px + env(safe-area-inset-top, 0px));padding-bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.modal{width:min(640px,100%);max-height:100%;overflow:auto;background:var(--panel);color:var(--ink);border:1px solid var(--rule);border-radius:16px;box-shadow:var(--shadow);font-family:var(--font-body);font-size:15px;line-height:1.7}
+.modal-head{position:sticky;top:0;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px 12px;background:var(--panel);border-bottom:1px solid var(--rule)}
+.modal-head h2{margin:0;font-family:var(--font-display);font-weight:600;font-size:22px}
+.modal-body{padding:4px 20px 22px}
+.modal-body h3{margin:18px 0 6px;font-family:var(--font-display);font-weight:600;font-size:18px}
+.modal-body ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
+.modal-body p{margin:0 0 8px;max-width:65ch}
+.math{font-family:var(--font-mono);font-size:.94em;white-space:nowrap}
+details.spoiler{margin-top:16px;border:1px solid var(--rule-2);border-radius:12px;padding:10px 14px;background:var(--panel-2)}
+details.spoiler summary{cursor:pointer;font-weight:700}
+details.spoiler[open] summary{margin-bottom:8px}
+
+@media (prefers-reduced-motion:reduce){
+  .chip.enter,.chip.leaving,.pile.nope,.win-arc.flash{animation:none}
+  .btn,.seg button,.switch input,.switch input::after,.pile,.lbl{transition:none}
+}
+</style>
+</head>
+<body>
+<div class="app" id="app" lang="ja">
+  <header class="masthead">
+    <div class="mast-text">
+      <h1>円形ニム<span class="cn">CN(5, 3)</span></h1>
+      <p class="lede">5つの山が輪に並ぶ石取りゲーム。連続して並ぶ3つの山から石を取り、最後の1個を取った人が勝ちです。</p>
+    </div>
+    <button type="button" class="btn ghost" id="btnRules">ルール</button>
+  </header>
+
+  <main class="layout">
+    <section class="stage" id="stage" aria-label="盤面">
+      <svg id="board" class="board" viewBox="-274 -280 548 472" role="application" tabindex="0" aria-label="円卓に5つの山。左右キーで山を選び、下キーで取る数を増やし、上キーで戻し、Enterで確定します。"></svg>
+
+      <div class="movebar" id="moveBar" hidden>
+        <div class="mb-text">
+          <div class="mb-main" id="mbMain"></div>
+          <div class="mb-sub" id="mbSub"></div>
+        </div>
+        <div class="mb-actions">
+          <button type="button" class="btn" id="btnCancel">取り消し</button>
+          <button type="button" class="btn primary" id="btnConfirm">この手で確定</button>
+        </div>
+      </div>
+
+      <div class="movebar" id="resultBar" hidden>
+        <div class="mb-text">
+          <div class="rb-title" id="rbTitle"></div>
+          <div class="mb-sub" id="rbSub"></div>
+        </div>
+        <div class="mb-actions">
+          <button type="button" class="btn" id="btnUndo2">一手戻す</button>
+          <button type="button" class="btn" id="btnSetup2">設定を変える</button>
+          <button type="button" class="btn primary" id="btnRematch">もう一局</button>
+        </div>
+      </div>
+    </section>
+
+    <aside class="side">
+      <section class="panel" id="setupPanel" aria-labelledby="setupTitle">
+        <h2 id="setupTitle">対局の準備</h2>
+        <p class="panel-intro">盤面は開始局面のプレビューです。設定を変えるとすぐに反映されます。</p>
+
+        <div class="field">
+          <div class="field-label" id="lblMode">対戦モード</div>
+          <div class="seg" data-name="mode" role="group" aria-labelledby="lblMode">
+            <button type="button" id="optModePvp" data-v="pvp">二人で対戦</button>
+            <button type="button" id="optModeCpu" data-v="cpu">CPUと対戦</button>
+          </div>
+        </div>
+
+        <div class="field cpu-only">
+          <div class="field-label" id="lblLevel">CPUの強さ</div>
+          <div class="seg" data-name="level" role="group" aria-labelledby="lblLevel">
+            <button type="button" id="optLvEasy" data-v="easy">よわい</button>
+            <button type="button" id="optLvNormal" data-v="normal">ふつう</button>
+            <button type="button" id="optLvHard" data-v="hard">つよい</button>
+          </div>
+          <p class="help" id="levelHelp"></p>
+        </div>
+
+        <div class="field cpu-only">
+          <div class="field-label" id="lblOrder">あなたの手番</div>
+          <div class="seg" data-name="order" role="group" aria-labelledby="lblOrder">
+            <button type="button" id="optOrdFirst" data-v="first">先手</button>
+            <button type="button" id="optOrdSecond" data-v="second">後手</button>
+            <button type="button" id="optOrdRandom" data-v="random">ランダム</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="field-label" id="lblStart">開始局面</div>
+          <div class="seg" data-name="start" role="group" aria-labelledby="lblStart">
+            <button type="button" id="optStartRandom" data-v="random">ランダム</button>
+            <button type="button" id="optStartCustom" data-v="custom">自分で並べる</button>
+          </div>
+          <div class="sub random-only">
+            <div class="sub-row">
+              <span class="sub-label" id="lblMax">山の高さの上限</span>
+              <div class="seg seg-sm" data-name="maxH" role="group" aria-labelledby="lblMax">
+                <button type="button" id="optMax5" data-v="5">5</button>
+                <button type="button" id="optMax7" data-v="7">7</button>
+                <button type="button" id="optMax9" data-v="9">9</button>
+                <button type="button" id="optMax12" data-v="12">12</button>
+              </div>
+            </div>
+            <button type="button" class="btn small" id="btnShuffle">別の局面を引く</button>
+          </div>
+          <div class="sub custom-only">
+            <div class="steppers" id="steppers"></div>
+            <p class="help">各山 0〜12 個。空の山があってもかまいません。</p>
+          </div>
+        </div>
+
+        <div class="field">
+          <button type="button" class="btn primary block" id="btnStart">対局を始める</button>
+          <p class="help" id="startHelp"></p>
+        </div>
+      </section>
+
+      <section class="panel" id="playPanel" aria-labelledby="playTitle" hidden>
+        <h2 id="playTitle" class="sr-only">対局</h2>
+        <div class="players" id="players"></div>
+        <div class="actions-row">
+          <button type="button" class="btn small" id="btnUndo">一手戻す</button>
+          <button type="button" class="btn small" id="btnNew">新しい対局</button>
+        </div>
+        <div class="block">
+          <div class="block-head">
+            <span class="field-label">現在の局面</span>
+            <span class="vec" id="vecNow"></span>
+          </div>
+          <label class="switch" for="anaToggle"><input type="checkbox" id="anaToggle"><span>解析を表示（勝ち負けの判定と勝ち手）</span></label>
+          <div class="ana" id="anaBox" hidden></div>
+        </div>
+        <div class="block">
+          <div class="block-head">
+            <span class="field-label">棋譜</span>
+            <span class="muted" id="histCount"></span>
+          </div>
+          <ol class="hist" id="histList"></ol>
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <footer class="foot">出典：M. Dufour, S. Heubach, “Circular Nim Games,” <i>Electron. J. Combin.</i> 20(2) (2013), #P22.</footer>
+</div>
+
+<div class="overlay" id="rulesOverlay" lang="ja" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="rulesTitle">
+    <div class="modal-head">
+      <h2 id="rulesTitle">ルール</h2>
+      <button type="button" class="btn small" id="rulesClose">閉じる</button>
+    </div>
+    <div class="modal-body">
+      <h3>遊び方</h3>
+      <ul>
+        <li>5つの山が輪の形に並んでいます。12時の位置が山1で、時計回りに山2〜山5。山5と山1も隣どうしです。</li>
+        <li>自分の番には<strong>連続して並ぶ3つの山</strong>を選び、そこから石を取ります。山ごとに何個取ってもよく（0個の山があってもよい）、合計で1個以上取ります。</li>
+        <li>交互に指して、<strong>最後の石を取った人の勝ち</strong>です。自分の番に石が1つも残っていなければ負けです。</li>
+      </ul>
+      <h3>操作</h3>
+      <ul>
+        <li>石をタップすると、その石から上をまとめて取る石に選びます。押したまま上下にすべらせると数を調整できます。いちばん下の選んだ石をもう一度タップすると1つ戻ります。</li>
+        <li>その手で一緒に選べない山は薄く表示されます。決まったら「この手で確定」を押します。</li>
+        <li>キーボードでは ← → で山を選び、↓ で1つ多く取り、↑ で1つ戻し、Enter で確定、Esc で取り消します。</li>
+      </ul>
+      <h3>出典</h3>
+      <p>M. Dufour, S. Heubach, “Circular Nim Games,” <i>Electron. J. Combin.</i> 20(2) (2013), #P22。一般の CN(n, k) は n 個の山を円形に並べ、連続する k 個の山から取るゲームです。CN(n, 1) は通常のニムになります。</p>
+      <details class="spoiler">
+        <summary>必勝法を見る（ネタバレ）</summary>
+        <p>論文の定理 3.1 (2)：CN(5, 3) の負け局面は、回転と裏返しで <span class="math">(0, b, c, d, b)</span>、<span class="math">b = c + d</span> と書ける局面全体です。</p>
+        <p>つまり、空の山があって、その両隣の山が同じ高さ b、向かい側の2つの山の高さの和も b になっている局面です。負け局面からどう指しても負け局面ではなくなり、それ以外の局面からは必ず負け局面へ移る手があります。</p>
+        <p>解析表示では、論文の記法にならって負け局面を L、勝ち局面を W と書きます。CPU の「つよい」はこの判定で手を選びます。各山の高さが12以下の全 371,293 局面で、後退解析の結果とこの特徴づけが一致することを確認しています。</p>
+      </details>
+    </div>
+  </div>
+</div>
+
+<div class="sr-only" id="live" aria-live="polite"></div>
+
+<script>
+(() => {
+'use strict';
+
+/* CORE-START: pure game logic for CN(5,3), no DOM */
+const N = 5;
+const MAXH = 12;
+const mod = i => ((i % N) + N) % N;
+const sum = a => a.reduce((s, x) => s + x, 0);
+const key = p => p.join(',');
+
+/* Thm 3.1(2): p is losing iff some p_i = 0, p_{i-1} = p_{i+1} = b and p_{i+2} + p_{i+3} = b. Returns such i, or -1. */
+function lossWitness(p) {
+  for (let i = 0; i < N; i++) {
+    if (p[i] !== 0) continue;
+    const b = p[mod(i + 1)];
+    if (p[mod(i - 1)] === b && p[mod(i + 2)] + p[mod(i + 3)] === b) return i;
+  }
+  return -1;
+}
+function isLosing(p) { return lossWitness(p) >= 0; }
+
+function changedSet(p, q) {
+  const s = [];
+  for (let i = 0; i < N; i++) if (p[i] !== q[i]) s.push(i);
+  return s;
+}
+/* windows {w, w+1, w+2} containing every stack in S */
+function windowsContaining(S) {
+  const out = [];
+  for (let w = 0; w < N; w++) if (S.every(i => mod(i - w) <= 2)) out.push(w);
+  return out;
+}
+/* stacks that may still join a selection S */
+function allowedPiles(S) {
+  if (!S.length) return [0, 1, 2, 3, 4];
+  const ok = new Set();
+  for (const w of windowsContaining(S)) { ok.add(w); ok.add(mod(w + 1)); ok.add(mod(w + 2)); }
+  return [...ok].sort((a, b) => a - b);
+}
+function isLegalMove(p, q) {
+  if (!Array.isArray(q) || q.length !== N) return false;
+  for (let i = 0; i < N; i++) if (!Number.isInteger(q[i]) || q[i] < 0 || q[i] > p[i]) return false;
+  const S = changedSet(p, q);
+  return S.length > 0 && windowsContaining(S).length > 0;
+}
+function forEachMove(p, fn) {
+  for (let w = 0; w < N; w++) {
+    const i0 = w, i1 = mod(w + 1), i2 = mod(w + 2), q = p.slice();
+    for (let a = 0; a <= p[i0]; a++) {
+      q[i0] = a;
+      for (let b = 0; b <= p[i1]; b++) {
+        q[i1] = b;
+        for (let c = 0; c <= p[i2]; c++) {
+          q[i2] = c;
+          if (a === p[i0] && b === p[i1] && c === p[i2]) continue;
+          fn(q);
+        }
+      }
+    }
+  }
+}
+function allMoves(p) {
+  const seen = new Set(), out = [];
+  forEachMove(p, q => { const k = key(q); if (!seen.has(k)) { seen.add(k); out.push(q.slice()); } });
+  return out;
+}
+/* moves into L; empty exactly when p itself is in L */
+function winningMoves(p) {
+  const seen = new Set(), out = [];
+  forEachMove(p, q => {
+    if (!isLosing(q)) return;
+    const k = key(q);
+    if (!seen.has(k)) { seen.add(k); out.push(q.slice()); }
+  });
+  return out;
+}
+/* moves taking at most two stones (every pair of stacks on a 5-cycle lies in some window) */
+function smallMoves(p) {
+  const out = [];
+  for (let i = 0; i < N; i++) for (let r = 1; r <= Math.min(2, p[i]); r++) { const q = p.slice(); q[i] -= r; out.push(q); }
+  for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) if (p[i] > 0 && p[j] > 0) { const q = p.slice(); q[i]--; q[j]--; out.push(q); }
+  return out;
+}
+function randomMove(p, rnd) {
+  const ne = [];
+  for (let i = 0; i < N; i++) if (p[i] > 0) ne.push(i);
+  const i = ne[Math.floor(rnd() * ne.length)];
+  const q = p.slice();
+  q[i] = Math.floor(rnd() * p[i]);
+  if (rnd() < 0.35) {
+    const nb = [mod(i - 1), mod(i + 1)].filter(j => p[j] > 0);
+    if (nb.length) { const j = nb[Math.floor(rnd() * nb.length)]; q[j] = Math.floor(rnd() * (p[j] + 1)); }
+  }
+  return q;
+}
+const OPT_RATE = { easy: 0.3, normal: 0.7, hard: 1 };
+function cpuChoose(p, level, rnd) {
+  rnd = rnd || Math.random;
+  const pick = arr => arr[Math.floor(rnd() * arr.length)];
+  const wins = winningMoves(p);
+  if (wins.length && rnd() < (OPT_RATE[level] === undefined ? 1 : OPT_RATE[level])) return pick(wins);
+  if (level === 'hard') {
+    /* p is in L: every move loses to perfect play, so leave as few winning replies as possible */
+    let best = [], score = Infinity;
+    for (const q of smallMoves(p)) {
+      const s = winningMoves(q).length;
+      if (s < score) { score = s; best = [q]; } else if (s === score) best.push(q);
+    }
+    return pick(best);
+  }
+  return randomMove(p, rnd);
+}
+/* CORE-END */
+
+/* ---------- settings ---------- */
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const reduceMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+const vecStr = p => `(${p.join(', ')})`;
+const describe = (p, q) => changedSet(p, q).map(i => `山${i + 1}から${p[i] - q[i]}個`).join('、');
+const LEVELS = ['easy', 'normal', 'hard'];
+const LEVEL_NAME = { easy: 'よわい', normal: 'ふつう', hard: 'つよい' };
+const LEVEL_HELP = {
+  easy: 'ときどきだけ最善手を指します。ルールに慣れるまでの相手に。',
+  normal: 'たいてい最善手を指しますが、ときどき見落とします。',
+  hard: '定理にもとづく完全な戦略で指します。勝ち局面からは必ず勝ちます。'
+};
+const STORE_KEY = 'circular-nim-cn53/settings';
+const DEFAULTS = { mode: 'cpu', level: 'normal', order: 'first', start: 'random', maxH: 7, custom: [3, 5, 2, 4, 6] };
+
+const validPos = p => Array.isArray(p) && p.length === N && p.every(v => Number.isInteger(v) && v >= 0 && v <= MAXH);
+function sanitizeSettings(s) {
+  const o = { ...DEFAULTS, custom: DEFAULTS.custom.slice() };
+  if (!s || typeof s !== 'object') return o;
+  if (s.mode === 'pvp' || s.mode === 'cpu') o.mode = s.mode;
+  if (LEVELS.includes(s.level)) o.level = s.level;
+  if (['first', 'second', 'random'].includes(s.order)) o.order = s.order;
+  if (s.start === 'random' || s.start === 'custom') o.start = s.start;
+  if ([5, 7, 9, 12].includes(s.maxH)) o.maxH = s.maxH;
+  if (validPos(s.custom)) o.custom = s.custom.slice();
+  return o;
+}
+function loadSettings() {
+  try { return sanitizeSettings(JSON.parse(localStorage.getItem(STORE_KEY) || 'null')); }
+  catch (e) { return sanitizeSettings(null); }
+}
+function saveSettings() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(settings)); } catch (e) { /* storage unavailable */ }
+}
+let settings = loadSettings();
+
+/* ---------- state ---------- */
+const st = {
+  phase: 'setup', pos: [0, 0, 0, 0, 0], pending: [0, 0, 0, 0, 0], start: [0, 0, 0, 0, 0], previewRandom: null,
+  players: [], turn: 0, history: [], over: false, winner: -1,
+  busy: false, cpuShow: false, analysis: false, hintIdx: 0,
+  focus: 0, kbd: false, preview: null, msg: '', token: 0
+};
+
+/* ---------- elements ---------- */
+const app = $('#app'), board = $('#board'), stage = $('#stage');
+const moveBar = $('#moveBar'), resultBar = $('#resultBar');
+const mbMain = $('#mbMain'), mbSub = $('#mbSub'), rbTitle = $('#rbTitle'), rbSub = $('#rbSub');
+const btnConfirm = $('#btnConfirm'), btnCancel = $('#btnCancel');
+const btnUndo = $('#btnUndo'), btnUndo2 = $('#btnUndo2'), btnNew = $('#btnNew'), btnSetup2 = $('#btnSetup2'), btnRematch = $('#btnRematch');
+const setupPanel = $('#setupPanel'), playPanel = $('#playPanel');
+const levelHelp = $('#levelHelp'), startHelp = $('#startHelp'), btnStart = $('#btnStart'), btnShuffle = $('#btnShuffle');
+const playersEl = $('#players'), vecNow = $('#vecNow'), anaToggle = $('#anaToggle'), anaBox = $('#anaBox');
+const histList = $('#histList'), histCount = $('#histCount'), live = $('#live'), rulesOverlay = $('#rulesOverlay');
+
+/* ---------- board geometry (oblique view of a round table) ---------- */
+const SVGNS = 'http://www.w3.org/2000/svg';
+const TABLE = { rx: 262, ry: 160 };
+const RING = { rx: 176, ry: 106 };
+const CH = { rx: 28, ry: 15, t: 12 };
+const BASES = Array.from({ length: N }, (_, k) => {
+  const th = (-90 + 72 * k) * Math.PI / 180;          /* stack 1 at 12 o'clock, then clockwise */
+  return { x: RING.rx * Math.cos(th), y: RING.ry * Math.sin(th), th };
+});
+const ORDER = [0, 1, 4, 2, 3];                          /* back to front */
+const FULL_RING = `M${RING.rx} 0A${RING.rx} ${RING.ry} 0 1 1 ${-RING.rx} 0A${RING.rx} ${RING.ry} 0 1 1 ${RING.rx} 0Z`;
+const r1 = v => Math.round(v * 10) / 10;
+let pilesG = null, arcEl = null, cMain = null, cSub = null;
+const labelEls = [];
+
+function mk(tag, attrs, parent) {
+  const e = document.createElementNS(SVGNS, tag);
+  if (attrs) for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+function grad(defs, type, id, attrs, stops) {
+  const g = mk(type, { id, ...attrs }, defs);
+  for (const [o, style] of stops) mk('stop', { offset: o, style }, g);
+}
+function initBoard() {
+  const defs = mk('defs', null, board);
+  grad(defs, 'radialGradient', 'gTop', { cx: '36%', cy: '30%', r: '78%' },
+    [['0', 'stop-color:var(--stone-hi)'], ['0.55', 'stop-color:var(--stone-top)'], ['1', 'stop-color:var(--stone-side)']]);
+  grad(defs, 'linearGradient', 'gSide', { x1: '0', x2: '1', y1: '0', y2: '0' },
+    [['0', 'stop-color:var(--stone-side-2)'], ['0.22', 'stop-color:var(--stone-side)'], ['0.55', 'stop-color:var(--stone-top)'], ['0.82', 'stop-color:var(--stone-side)'], ['1', 'stop-color:var(--stone-side-2)']]);
+  grad(defs, 'radialGradient', 'gTable', { cx: '50%', cy: '36%', r: '72%' },
+    [['0', 'stop-color:var(--slate-1)'], ['1', 'stop-color:var(--slate-2)']]);
+  grad(defs, 'linearGradient', 'gRim', { x1: '0', x2: '0', y1: '0', y2: '1' },
+    [['0', 'stop-color:var(--slate-rim)'], ['1', 'stop-color:var(--slate-rim-2)']]);
+  grad(defs, 'radialGradient', 'gShadow', { cx: '50%', cy: '50%', r: '50%' },
+    [['0.7', 'stop-color:var(--table-shadow);stop-opacity:1'], ['1', 'stop-color:var(--table-shadow);stop-opacity:0']]);
+  grad(defs, 'radialGradient', 'gPile', { cx: '50%', cy: '50%', r: '50%' },
+    [['0.35', 'stop-color:var(--pile-shadow);stop-opacity:1'], ['1', 'stop-color:var(--pile-shadow);stop-opacity:0']]);
+
+  const tbl = mk('g', { class: 'tbl' }, board);
+  mk('ellipse', { class: 'table-shadow', cx: 0, cy: 24, rx: 272, ry: 166 }, tbl);
+  mk('ellipse', { class: 'table-rim', cx: 0, cy: 13, rx: TABLE.rx, ry: TABLE.ry }, tbl);
+  mk('ellipse', { class: 'table-top', cx: 0, cy: 0, rx: TABLE.rx, ry: TABLE.ry }, tbl);
+  mk('ellipse', { class: 'table-bevel', cx: 0, cy: 0, rx: TABLE.rx - 7, ry: TABLE.ry - 6 }, tbl);
+  mk('ellipse', { class: 'ring', cx: 0, cy: 0, rx: RING.rx, ry: RING.ry }, tbl);
+  arcEl = mk('path', { class: 'win-arc', d: '' }, tbl);
+  cMain = mk('text', { class: 'c-main', x: 0, y: -2 }, tbl);
+  cSub = mk('text', { class: 'c-sub', x: 0, y: 21 }, tbl);
+  for (let k = 0; k < N; k++) labelEls[k] = mk('text', { class: 'lbl', x: r1(BASES[k].x), y: r1(BASES[k].y + 36) }, tbl);
+  pilesG = mk('g', { class: 'piles' }, board);
+}
+/* frame the table plus the tallest stack of a starting position (heights only shrink during a game) */
+function fitView(p) {
+  let top = -TABLE.ry - 20;
+  for (let k = 0; k < N; k++) if (p[k] > 0) top = Math.min(top, BASES[k].y - p[k] * CH.t - CH.ry - 18);
+  top = r1(top);
+  board.setAttribute('viewBox', `-274 ${top} 548 ${r1(194 - top)}`);
+}
+function chipEl(k, j) {
+  const bx = BASES[k].x, by = BASES[k].y;
+  const yb = r1(by - (j - 1) * CH.t), yt = r1(by - j * CH.t);
+  const L = r1(bx - CH.rx), R = r1(bx + CH.rx);
+  const g = mk('g', { class: 'chip' });
+  g.dataset.j = String(j);
+  mk('path', { class: 'side', d: `M${L} ${yt}V${yb}A${CH.rx} ${CH.ry} 0 0 0 ${R} ${yb}V${yt}Z` }, g);
+  mk('ellipse', { class: 'top', cx: r1(bx), cy: yt, rx: CH.rx, ry: CH.ry }, g);
+  return g;
+}
+function buildPiles(enter, drop) {
+  pilesG.textContent = '';
+  ORDER.forEach((k, order) => {
+    const bx = BASES[k].x, by = BASES[k].y, h = st.pos[k];
+    const g = mk('g', { class: 'pile' }, pilesG);
+    g.dataset.k = String(k);
+    mk('ellipse', { class: 'focus-ring', cx: r1(bx), cy: r1(by + 2), rx: CH.rx + 13, ry: CH.ry + 9 }, g);
+    if (h > 0) mk('ellipse', { class: 'pshadow', cx: r1(bx + 5), cy: r1(by + 5), rx: CH.rx + 13, ry: CH.ry + 7 }, g);
+    else mk('ellipse', { class: 'slot', cx: r1(bx), cy: r1(by), rx: CH.rx, ry: CH.ry }, g);
+    for (let j = 1; j <= h; j++) {
+      const c = chipEl(k, j);
+      if (!reduceMotion && (enter || (drop && drop.k === k && drop.j === j))) {
+        c.classList.add('enter');
+        c.style.setProperty('--d', enter ? `${order * 70 + j * 26}ms` : '0ms');
+      }
+      g.appendChild(c);
+    }
+    const top = by - MAXH * CH.t - CH.ry - 20;
+    const hit = mk('rect', { class: 'hit', x: r1(bx - 36), y: r1(top), width: 72, height: r1(by + 52 - top) }, g);
+    hit.dataset.k = String(k);
+  });
+}
+/* shortest arc of the ring covering a legal selection S */
+function arcSpan(S) {
+  let best = null;
+  for (const k0 of S) {
+    const span = Math.max(...S.map(i => mod(i - k0)));
+    if (span <= 2 && (!best || span < best.span)) best = { k0, span };
+  }
+  return best;
+}
+function arcPath(k0, span) {
+  const pad = 13 * Math.PI / 180, step = 72 * Math.PI / 180;
+  const t0 = BASES[k0].th - pad, t1 = BASES[k0].th + span * step + pad;
+  const n = Math.max(10, Math.round((t1 - t0) / (3 * Math.PI / 180)));
+  let d = '';
+  for (let s = 0; s <= n; s++) {
+    const t = t0 + (t1 - t0) * s / n;
+    d += (s ? 'L' : 'M') + r1(RING.rx * Math.cos(t)) + ' ' + r1(RING.ry * Math.sin(t));
+  }
+  return d;
+}
+
+/* ---------- painting ---------- */
+function humanCanAct() {
+  return st.phase === 'play' && !st.over && !st.busy && !!st.players[st.turn] && st.players[st.turn].kind === 'human';
+}
+function canUndo() {
+  return st.phase === 'play' && st.history.some(h => st.players[h.by] && st.players[h.by].kind === 'human');
+}
+let anaCache = { k: '', wins: [] };
+function getWins(p) {
+  const k = key(p);
+  if (anaCache.k !== k) anaCache = { k, wins: winningMoves(p) };
+  return anaCache.wins;
+}
+
+function paint() {
+  const playing = st.phase === 'play';
+  const color = playing ? st.players[st.over ? st.winner : st.turn].color : 'p1';
+  app.style.setProperty('--turn', `var(--${color})`);
+  app.style.setProperty('--turn-fill', `var(--${color}-fill)`);
+  app.style.setProperty('--turn-on', `var(--${color}-on)`);
+  app.style.setProperty('--take', `var(--${color}-glow)`);
+
+  const canEdit = humanCanAct();
+  const S = changedSet(st.pos, st.pending);
+  const allowed = allowedPiles(S);
+  board.classList.toggle('locked', !canEdit);
+  for (const g of pilesG.children) {
+    const k = +g.dataset.k;
+    const dis = canEdit && !allowed.includes(k);
+    g.classList.toggle('disabled', dis);
+    g.classList.toggle('focused', canEdit && st.kbd && st.focus === k);
+    labelEls[k].classList.toggle('dim', dis);
+    const pv = st.preview && st.preview.k === k ? st.preview.j : Infinity;
+    for (const c of g.querySelectorAll('.chip')) {
+      const j = +c.dataset.j;
+      c.classList.toggle('take', j > st.pending[k]);
+      c.classList.toggle('preview', j >= pv && j <= st.pending[k]);
+    }
+  }
+  const victory = playing && st.over;
+  arcEl.classList.toggle('victory', victory);
+  if (victory) arcEl.setAttribute('d', FULL_RING);
+  else {
+    const sp = S.length ? arcSpan(S) : null;
+    arcEl.setAttribute('d', sp ? arcPath(sp.k0, sp.span) : '');
+  }
+  for (let k = 0; k < N; k++) paintLabel(k);
+  paintCenter();
+  paintBars();
+  setupPanel.hidden = playing;
+  playPanel.hidden = !playing;
+  if (playing) paintPlay(); else paintSetup();
+}
+function paintLabel(k) {
+  const t = labelEls[k], from = st.pos[k], to = st.pending[k];
+  t.textContent = '';
+  mk('tspan', { class: 'idx' }, t).textContent = `山${k + 1}`;
+  mk('tspan', { class: from === to ? 'cnt' : 'cnt was', dx: '7' }, t).textContent = String(from);
+  if (from !== to) {
+    mk('tspan', { class: 'arr', dx: '5' }, t).textContent = '→';
+    mk('tspan', { class: 'to', dx: '5' }, t).textContent = String(to);
+  }
+}
+function paintCenter() {
+  let main, sub, fill = 'var(--chalk)';
+  if (st.phase === 'setup') { main = '開始局面'; sub = vecStr(st.pos); }
+  else if (st.over) {
+    const w = st.players[st.winner];
+    main = `${w.name}の勝ち`; sub = `全 ${st.history.length} 手`; fill = `var(--${w.color}-glow)`;
+  } else {
+    const cur = st.players[st.turn];
+    fill = `var(--${cur.color}-glow)`;
+    main = `${cur.name}の番`;
+    sub = cur.kind === 'cpu' ? (st.cpuShow ? 'この石を取ります' : '考えています…') : `第 ${st.history.length + 1} 手`;
+  }
+  cMain.textContent = main;
+  cMain.style.fill = fill;
+  cSub.textContent = sub;
+}
+function paintBars() {
+  const playing = st.phase === 'play';
+  moveBar.hidden = !(playing && !st.over);
+  resultBar.hidden = !(playing && st.over);
+  if (!playing) return;
+  if (st.over) {
+    const w = st.players[st.winner];
+    rbTitle.textContent = `${w.name}の勝ちです`;
+    rbSub.textContent = `${w.name}が最後の石を取りました。全 ${st.history.length} 手。`;
+    btnUndo2.disabled = !canUndo();
+    return;
+  }
+  const cur = st.players[st.turn];
+  const taken = sum(st.pos) - sum(st.pending);
+  mbSub.classList.toggle('warn', !!st.msg && cur.kind === 'human');
+  if (cur.kind === 'cpu') {
+    mbMain.textContent = st.cpuShow ? `CPU：${describe(st.pos, st.pending)}` : 'CPUが考えています…';
+    mbSub.textContent = st.cpuShow ? `取ったあとの局面 ${vecStr(st.pending)}` : `強さ：${LEVEL_NAME[cur.level] || ''}`;
+  } else if (taken === 0) {
+    mbMain.textContent = `${cur.name}の番です。取る石を選んでください`;
+    mbSub.textContent = st.msg || '石をタップ、または押したまま上下にすべらせて数を決めます。連続する3つの山から、合計1個以上。';
+  } else {
+    mbMain.textContent = describe(st.pos, st.pending);
+    mbSub.textContent = st.msg || `合計 ${taken} 個。取ったあとの局面 ${vecStr(st.pending)}`;
+  }
+  const can = humanCanAct() && taken > 0;
+  btnConfirm.disabled = !can;
+  btnCancel.disabled = !can;
+}
+function startNote() {
+  if (sum(st.pos) === 0) return 'すべての山が空です。どこかに石を置いてください。';
+  if (settings.mode === 'pvp') return '1台の端末を交代で使います。先手は山吹色、後手は浅葱色です。';
+  return {
+    first: 'あなたが先手（山吹色）で始めます。',
+    second: 'CPUが先手で始めます。あなたは後手（山吹色）です。',
+    random: '先手と後手は対局開始時にランダムで決めます。'
+  }[settings.order];
+}
+function paintSetup() {
+  for (const seg of $$('.seg[data-name]')) {
+    const name = seg.dataset.name;
+    for (const b of seg.querySelectorAll('button')) b.setAttribute('aria-pressed', String(String(settings[name]) === b.dataset.v));
+  }
+  $$('.cpu-only').forEach(e => { e.hidden = settings.mode !== 'cpu'; });
+  $$('.random-only').forEach(e => { e.hidden = settings.start !== 'random'; });
+  $$('.custom-only').forEach(e => { e.hidden = settings.start !== 'custom'; });
+  levelHelp.textContent = LEVEL_HELP[settings.level];
+  for (let k = 0; k < N; k++) {
+    stepOut[k].textContent = String(settings.custom[k]);
+    stepUp[k].disabled = settings.custom[k] >= MAXH;
+    stepDown[k].disabled = settings.custom[k] <= 0;
+  }
+  const empty = sum(st.pos) === 0;
+  btnStart.disabled = empty;
+  startHelp.textContent = startNote();
+  startHelp.classList.toggle('warn', empty);
+}
+function paintPlay() {
+  const pvp = st.players.every(p => p.kind === 'human');
+  playersEl.textContent = '';
+  st.players.forEach((p, i) => {
+    const active = !st.over && i === st.turn, won = st.over && i === st.winner;
+    const role = i === 0 ? '先手' : '後手';
+    const sub = pvp ? (p.color === 'p1' ? '山吹色' : '浅葱色') : (p.kind === 'cpu' ? `${role}・${LEVEL_NAME[p.level] || ''}` : role);
+    const tag = won ? '勝ち' : active ? (p.kind === 'cpu' ? '考え中' : '手番') : '';
+    const row = document.createElement('div');
+    row.className = 'player' + (active ? ' active' : '') + (won ? ' winner' : '');
+    row.style.setProperty('--pc', `var(--${p.color})`);
+    row.innerHTML = `<span class="dot" aria-hidden="true"></span><span class="pname">${esc(p.name)}<small>${esc(sub)}</small></span><span class="tag">${tag}</span>`;
+    playersEl.appendChild(row);
+  });
+  btnUndo.disabled = !canUndo();
+  vecNow.textContent = vecStr(st.pos);
+  paintAnalysis();
+  paintHistory();
+}
+function paintAnalysis() {
+  anaToggle.checked = st.analysis;
+  anaBox.hidden = !st.analysis;
+  if (!st.analysis) return;
+  if (st.over) { anaBox.innerHTML = '<p class="ana-head"><span class="badge end">終局</span>石はもう残っていません。</p>'; return; }
+  const p = st.pos, w = lossWitness(p), cur = st.players[st.turn];
+  if (w >= 0) {
+    const a = mod(w - 1), b = mod(w + 1), c = mod(w + 2), d = mod(w + 3);
+    anaBox.innerHTML =
+      `<p class="ana-head"><span class="badge lose">L</span>負け局面です。手番の${esc(cur.name)}は、相手が正しく指すかぎり負けます。</p>` +
+      `<p class="ana-math">山${w + 1} = 0、山${a + 1} = 山${b + 1} = ${p[b]}、山${c + 1} + 山${d + 1} = ${p[c]} + ${p[d]} = ${p[b]}</p>`;
+  } else {
+    const wins = getWins(p), n = wins.length;
+    let html = `<p class="ana-head"><span class="badge win">W</span>勝ち局面です。負け局面へ移す手が ${n} 通りあります。</p>`;
+    if (humanCanAct()) html += `<div><button type="button" class="btn small" id="btnHint">勝ち手を盤に入れる（${(st.hintIdx % n) + 1} / ${n}）</button></div>`;
+    anaBox.innerHTML = html;
+  }
+}
+let histSig = '';
+function paintHistory() {
+  const sig = `${st.token}:${st.history.length}`;
+  histCount.textContent = `${st.history.length} 手`;
+  if (sig === histSig) return;
+  histSig = sig;
+  histList.textContent = '';
+  const first = document.createElement('li');
+  first.innerHTML = `<span class="h-n">0</span><span class="h-body"><span class="h-who">開始</span><span class="h-vec">${vecStr(st.start)}</span></span>`;
+  histList.appendChild(first);
+  st.history.forEach((h, i) => {
+    const p = st.players[h.by];
+    const li = document.createElement('li');
+    li.style.setProperty('--pc', `var(--${p.color})`);
+    li.innerHTML = `<span class="h-n">${i + 1}</span><span class="h-body"><span class="h-who">${esc(p.name)}</span><span>${describe(h.before, h.after)}</span><span class="h-vec">→ ${vecStr(h.after)}</span></span>`;
+    histList.appendChild(li);
+  });
+  histList.scrollTop = histList.scrollHeight;
+}
+
+/* ---------- messages ---------- */
+let sayTimer = 0, flashTimer = 0;
+function say(text) {
+  live.textContent = '';
+  clearTimeout(sayTimer);
+  sayTimer = setTimeout(() => { live.textContent = text; }, 50);
+}
+function flash(msg) {
+  st.msg = msg;
+  paint();
+  clearTimeout(flashTimer);
+  flashTimer = setTimeout(() => { if (st.msg === msg) { st.msg = ''; paint(); } }, 4200);
+}
+function restartAnim(el, cls) {
+  if (!el || reduceMotion) return;
+  el.classList.remove(cls);
+  void el.getBoundingClientRect();
+  el.classList.add(cls);
+}
+function blocked(k) {
+  flash(`山${k + 1}は選べません。1手で石を取れるのは、連続して並ぶ3つの山の中だけです。`);
+  restartAnim(pilesG.querySelector(`.pile[data-k="${k}"]`), 'nope');
+  restartAnim(arcEl, 'flash');
+}
+
+/* ---------- pointer and keyboard input ---------- */
+let drag = null;
+function svgY(e) {
+  const m = board.getScreenCTM();
+  if (!m) return 0;
+  const pt = board.createSVGPoint();
+  pt.x = e.clientX; pt.y = e.clientY;
+  return pt.matrixTransform(m.inverse()).y;
+}
+/* stone index under height y: 1..h, h+1 above the pile, 0 below its foot */
+function levelAt(k, y) {
+  const by = BASES[k].y, h = st.pos[k];
+  if (y > by + CH.ry + 3) return 0;
+  let j = Math.ceil((by + CH.ry - y) / CH.t);
+  if (j < 1) j = 1;
+  if (j > h) j = (y >= by - h * CH.t - CH.ry - 4) ? h : h + 1;
+  return j;
+}
+function setPending(k, v) {
+  if (st.pending[k] === v) return;
+  st.pending[k] = v;
+  st.msg = '';
+  paint();
+}
+function onDown(e) {
+  if (e.pointerType === 'mouse' && e.button !== 0) return;
+  const hit = e.target && e.target.closest ? e.target.closest('.hit') : null;
+  if (!hit || !humanCanAct()) return;
+  const k = +hit.dataset.k;
+  st.kbd = false;
+  st.focus = k;
+  if (!allowedPiles(changedSet(st.pos, st.pending)).includes(k)) { blocked(k); return; }
+  if (st.pos[k] === 0) { flash(`山${k + 1}には石がありません。`); return; }
+  e.preventDefault();
+  try { board.setPointerCapture(e.pointerId); } catch (err) { /* capture unavailable */ }
+  const h = st.pos[k], j = levelAt(k, svgY(e));
+  drag = { k, id: e.pointerId, x0: e.clientX, y0: e.clientY, moved: false, prev: st.pending[k], j };
+  st.preview = null;
+  if (j >= 1 && j <= h) setPending(k, j - 1);
+  else if (j > h) setPending(k, h);
+  else paint();
+}
+function onMove(e) {
+  if (drag && e.pointerId === drag.id) {
+    if (!drag.moved && Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) > 6) drag.moved = true;
+    if (drag.moved) setPending(drag.k, clamp(levelAt(drag.k, svgY(e)) - 1, 0, st.pos[drag.k]));
+    return;
+  }
+  if (e.pointerType === 'mouse') hover(e);
+}
+function onUp(e) {
+  if (!drag || e.pointerId !== drag.id) return;
+  const d = drag;
+  drag = null;
+  /* tapping the lowest selected stone again puts it back */
+  if (e.type === 'pointerup' && !d.moved && d.j >= 1 && d.j <= st.pos[d.k] && d.prev === d.j - 1) setPending(d.k, d.j);
+  if (e.pointerType === 'mouse') hover(e);
+}
+function hover(e) {
+  let pv = null;
+  if (humanCanAct()) {
+    const el = document.elementFromPoint(e.clientX, e.clientY);
+    const hit = el && el.closest ? el.closest('.hit') : null;
+    if (hit) {
+      const k = +hit.dataset.k;
+      if (st.pos[k] > 0 && allowedPiles(changedSet(st.pos, st.pending)).includes(k)) {
+        const j = levelAt(k, svgY(e));
+        if (j >= 1 && j <= st.pending[k]) pv = { k, j };
+      }
+    }
+  }
+  const same = pv && st.preview ? (pv.k === st.preview.k && pv.j === st.preview.j) : (!pv && !st.preview);
+  if (!same) { st.preview = pv; paint(); }
+}
+function onKey(e) {
+  if (!humanCanAct()) return;
+  const k = st.focus;
+  switch (e.key) {
+    case 'ArrowRight': st.focus = mod(k + 1); break;
+    case 'ArrowLeft': st.focus = mod(k - 1); break;
+    case 'ArrowDown':
+    case 'ArrowUp': {
+      st.kbd = true;
+      if (!allowedPiles(changedSet(st.pos, st.pending)).includes(k)) { e.preventDefault(); blocked(k); return; }
+      st.pending[k] = clamp(st.pending[k] + (e.key === 'ArrowUp' ? 1 : -1), 0, st.pos[k]);
+      st.msg = '';
+      break;
+    }
+    case 'Enter':
+    case ' ':
+      e.preventDefault(); confirmMove(); return;
+    case 'Escape':
+      e.preventDefault(); cancelPending(); return;
+    default:
+      if (/^[1-5]$/.test(e.key)) { st.focus = +e.key - 1; break; }
+      return;
+  }
+  e.preventDefault();
+  st.kbd = true;
+  st.preview = null;
+  paint();
+}
+
+/* ---------- game flow ---------- */
+function randomPosition(maxH) { return Array.from({ length: N }, () => 1 + Math.floor(Math.random() * maxH)); }
+function confirmMove() {
+  if (!humanCanAct()) return;
+  const q = st.pending.slice();
+  if (!isLegalMove(st.pos, q)) return;
+  commit(q);
+}
+function cancelPending() {
+  if (!humanCanAct()) return;
+  st.pending = st.pos.slice();
+  st.msg = '';
+  paint();
+}
+function commit(q) {
+  const p = st.pos.slice(), by = st.turn, tok = st.token;
+  st.busy = true;
+  st.preview = null;
+  st.msg = '';
+  for (const g of pilesG.children) {
+    const k = +g.dataset.k;
+    for (const c of g.querySelectorAll('.chip')) if (+c.dataset.j > q[k]) c.classList.add('leaving');
+  }
+  paint();
+  setTimeout(() => {
+    if (tok !== st.token) return;
+    st.history.push({ before: p, after: q.slice(), by });
+    st.pos = q.slice();
+    st.pending = q.slice();
+    st.hintIdx = 0;
+    st.cpuShow = false;
+    buildPiles(false);
+    const who = st.players[by].name;
+    if (sum(q) === 0) {
+      st.over = true; st.winner = by; st.busy = false;
+      paint();
+      say(`${who}：${describe(p, q)}。${who}の勝ちです。`);
+      return;
+    }
+    st.turn = 1 - by;
+    st.busy = false;
+    paint();
+    say(`${who}：${describe(p, q)}。局面 ${vecStr(q)}`);
+    scheduleCPU();
+  }, reduceMotion ? 60 : 380);
+}
+function scheduleCPU(delay) {
+  if (st.phase !== 'play' || st.over) return;
+  const cur = st.players[st.turn];
+  if (!cur || cur.kind !== 'cpu') return;
+  st.busy = true;
+  st.cpuShow = false;
+  paint();
+  const tok = st.token;
+  setTimeout(() => {
+    if (tok !== st.token) return;
+    const q = cpuChoose(st.pos, cur.level);
+    st.pending = q.slice();
+    st.cpuShow = true;
+    paint();
+    setTimeout(() => { if (tok === st.token) commit(q); }, reduceMotion ? 350 : 850);
+  }, (delay === undefined ? 450 : delay) + (reduceMotion ? 0 : Math.random() * 450));
+}
+function setPlayers() {
+  if (settings.mode === 'pvp') {
+    st.players = [{ name: '先手', kind: 'human', color: 'p1' }, { name: '後手', kind: 'human', color: 'p2' }];
+    return;
+  }
+  const youFirst = settings.order === 'first' || (settings.order === 'random' && Math.random() < 0.5);
+  const you = { name: 'あなた', kind: 'human', color: 'p1' };
+  const cpu = { name: 'CPU', kind: 'cpu', color: 'p2', level: settings.level };
+  st.players = youFirst ? [you, cpu] : [cpu, you];
+}
+function startGame() {
+  if (sum(st.pos) === 0) return;
+  st.token++;
+  setPlayers();
+  Object.assign(st, {
+    phase: 'play', start: st.pos.slice(), pending: st.pos.slice(), turn: 0, history: [], over: false, winner: -1,
+    busy: false, cpuShow: false, hintIdx: 0, msg: '', preview: null, kbd: false, focus: 0
+  });
+  paint();
+  say(`対局開始。${st.players[0].name}が先手です。局面 ${vecStr(st.pos)}`);
+  if (window.matchMedia && window.matchMedia('(max-width: 900px)').matches && stage.getBoundingClientRect().top < 0) {
+    stage.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+  }
+  scheduleCPU(700);
+}
+function rematch() {
+  st.previewRandom = randomPosition(settings.maxH);
+  st.pos = (settings.start === 'custom' ? settings.custom : st.previewRandom).slice();
+  st.pending = st.pos.slice();
+  fitView(st.pos);
+  buildPiles(true);
+  startGame();
+}
+function refreshPreview(enter, drop) {
+  st.pos = (settings.start === 'custom' ? settings.custom : st.previewRandom).slice();
+  st.pending = st.pos.slice();
+  fitView(st.pos);
+  buildPiles(enter, drop);
+  paint();
+}
+function enterSetup(animate) {
+  st.token++;
+  Object.assign(st, { phase: 'setup', over: false, winner: -1, busy: false, cpuShow: false, history: [], msg: '', preview: null, kbd: false });
+  st.previewRandom = randomPosition(settings.maxH);
+  refreshPreview(animate);
+}
+function undo() {
+  if (!canUndo()) return;
+  st.token++;
+  let e = st.history.pop();
+  st.pos = e.before.slice(); st.turn = e.by;
+  while (st.players[st.turn].kind === 'cpu' && st.history.length) {
+    e = st.history.pop();
+    st.pos = e.before.slice(); st.turn = e.by;
+  }
+  Object.assign(st, { pending: st.pos.slice(), over: false, winner: -1, busy: false, cpuShow: false, hintIdx: 0, msg: '', preview: null });
+  buildPiles(false);
+  paint();
+  say(`一手戻しました。局面 ${vecStr(st.pos)}`);
+  scheduleCPU();
+}
+function onSeg(e) {
+  const b = e.target.closest('button');
+  if (!b || st.phase !== 'setup') return;
+  const name = e.currentTarget.dataset.name;
+  const v = name === 'maxH' ? Number(b.dataset.v) : b.dataset.v;
+  if (settings[name] === v) return;
+  settings[name] = v;
+  saveSettings();
+  if (name === 'maxH') { st.previewRandom = randomPosition(settings.maxH); refreshPreview(true); }
+  else if (name === 'start') refreshPreview(true);
+  else paint();
+}
+function onHint(e) {
+  if (!e.target.closest('#btnHint') || !humanCanAct()) return;
+  const wins = getWins(st.pos);
+  if (!wins.length) return;
+  st.pending = wins[st.hintIdx % wins.length].slice();
+  st.hintIdx++;
+  st.msg = '';
+  paint();
+}
+
+/* ---------- custom position steppers ---------- */
+const stepOut = [], stepUp = [], stepDown = [];
+function initSteppers() {
+  const wrap = $('#steppers');
+  for (let k = 0; k < N; k++) {
+    const d = document.createElement('div');
+    d.className = 'stepper';
+    d.innerHTML =
+      `<span class="st-name">山${k + 1}</span>` +
+      `<button type="button" class="st-btn" id="stepUp${k}" aria-label="山${k + 1}に1個足す">+</button>` +
+      `<output id="stepVal${k}">0</output>` +
+      `<button type="button" class="st-btn" id="stepDown${k}" aria-label="山${k + 1}から1個減らす">−</button>`;
+    wrap.appendChild(d);
+    stepOut[k] = d.querySelector('output');
+    stepUp[k] = d.querySelector(`#stepUp${k}`);
+    stepDown[k] = d.querySelector(`#stepDown${k}`);
+    stepUp[k].addEventListener('click', () => bumpCustom(k, 1));
+    stepDown[k].addEventListener('click', () => bumpCustom(k, -1));
+  }
+}
+function bumpCustom(k, d) {
+  const v = clamp(settings.custom[k] + d, 0, MAXH);
+  if (v === settings.custom[k]) return;
+  settings.custom[k] = v;
+  saveSettings();
+  refreshPreview(false, d > 0 ? { k, j: v } : null);
+}
+
+/* ---------- rules dialog ---------- */
+let lastFocus = null;
+function openRules() {
+  lastFocus = document.activeElement;
+  rulesOverlay.hidden = false;
+  $('#rulesClose').focus();
+}
+function closeRules() {
+  rulesOverlay.hidden = true;
+  if (lastFocus && lastFocus.focus) lastFocus.focus();
+}
+
+function wire() {
+  board.addEventListener('pointerdown', onDown);
+  board.addEventListener('pointermove', onMove);
+  board.addEventListener('pointerup', onUp);
+  board.addEventListener('pointercancel', onUp);
+  board.addEventListener('pointerleave', () => { if (!drag && st.preview) { st.preview = null; paint(); } });
+  board.addEventListener('keydown', onKey);
+  board.addEventListener('focus', () => {
+    let kb = false;
+    try { kb = board.matches(':focus-visible'); } catch (err) { kb = false; }
+    if (kb && humanCanAct()) { st.kbd = true; paint(); }
+  });
+  board.addEventListener('blur', () => { if (st.kbd) { st.kbd = false; paint(); } });
+  btnConfirm.addEventListener('click', confirmMove);
+  btnCancel.addEventListener('click', cancelPending);
+  btnUndo.addEventListener('click', undo);
+  btnUndo2.addEventListener('click', undo);
+  btnNew.addEventListener('click', () => enterSetup(true));
+  btnSetup2.addEventListener('click', () => enterSetup(true));
+  btnRematch.addEventListener('click', rematch);
+  btnStart.addEventListener('click', startGame);
+  btnShuffle.addEventListener('click', () => { st.previewRandom = randomPosition(settings.maxH); refreshPreview(true); });
+  anaToggle.addEventListener('change', () => { st.analysis = anaToggle.checked; paint(); });
+  anaBox.addEventListener('click', onHint);
+  for (const seg of $$('.seg[data-name]')) seg.addEventListener('click', onSeg);
+  $('#btnRules').addEventListener('click', openRules);
+  $('#rulesClose').addEventListener('click', closeRules);
+  rulesOverlay.addEventListener('click', e => { if (e.target === rulesOverlay) closeRules(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !rulesOverlay.hidden) { e.preventDefault(); closeRules(); } });
+}
+
+/* ---------- boot, with state kept across live updates ---------- */
+function snapshot() {
+  return {
+    v: 1, settings, analysis: st.analysis, phase: st.phase, pos: st.pos, start: st.start, previewRandom: st.previewRandom,
+    players: st.players, turn: st.turn, history: st.history, over: st.over, winner: st.winner
+  };
+}
+function restore(d) {
+  try {
+    if (!d || d.v !== 1) return false;
+    settings = sanitizeSettings(d.settings);
+    st.analysis = !!d.analysis;
+    if (validPos(d.previewRandom)) st.previewRandom = d.previewRandom.slice();
+    if (d.phase !== 'play' || !validPos(d.pos) || !validPos(d.start) || !Array.isArray(d.players) || d.players.length !== 2 || !Array.isArray(d.history)) return false;
+    st.players = d.players.map(p => ({
+      name: String(p && p.name || ''), kind: p && p.kind === 'cpu' ? 'cpu' : 'human',
+      color: p && p.color === 'p2' ? 'p2' : 'p1', level: LEVELS.includes(p && p.level) ? p.level : 'normal'
+    }));
+    st.history = d.history
+      .filter(h => h && validPos(h.before) && validPos(h.after) && (h.by === 0 || h.by === 1))
+      .map(h => ({ before: h.before.slice(), after: h.after.slice(), by: h.by }));
+    Object.assign(st, { phase: 'play', pos: d.pos.slice(), start: d.start.slice(), pending: d.pos.slice(), turn: d.turn === 1 ? 1 : 0 });
+    st.over = !!d.over && sum(st.pos) === 0;
+    st.winner = st.over ? (d.winner === 1 ? 1 : 0) : -1;
+    if (!st.previewRandom) st.previewRandom = randomPosition(settings.maxH);
+    fitView(st.start);
+    buildPiles(false);
+    paint();
+    scheduleCPU(600);
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
+let started = false;
+function start(data) {
+  if (started) return;
+  started = true;
+  initBoard();
+  initSteppers();
+  wire();
+  if (!restore(data)) enterSetup(false);
+}
+const hot = window.claude && window.claude.hot;
+if (hot && typeof hot.snapshot === 'function') { try { hot.snapshot(snapshot); } catch (err) { /* ignore */ } }
+if (hot && typeof hot.ready === 'function') hot.ready(start);
+else start((hot && hot.data) || {});
+})();
+</script>
+</body>
+</html>
